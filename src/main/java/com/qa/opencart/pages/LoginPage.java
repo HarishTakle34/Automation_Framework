@@ -22,6 +22,8 @@ public class LoginPage {
 	 private By registerlink= By.linkText("Register");
 	 private By loginErrorMessage = By.cssSelector(".alert.alert-danger.alert-dismissible");
 	 
+	 private By textlocator= By.id("text");
+	 
 	 //page const....
 	 public LoginPage(WebDriver driver)
 	 {
