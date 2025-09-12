@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"login page title test","423","loginPageTitleTest","OpenCart Spp Test Regression Suite","2025-09-09","passed","2025-09-09","com.qa.opencart.tests.LoginPageTest","Login Page Test ","com.qa.opencart.tests.LoginPageTest","loginPageTitleTest"
+"login page URL test","92","loginPageURLTest","OpenCart Spp Test Regression Suite","2025-09-09","passed","2025-09-09","com.qa.opencart.tests.LoginPageTest","Login Page Test ","com.qa.opencart.tests.LoginPageTest","loginPageURLTest"
+"Verify the password link test ","100","forgotPwdLinkExistTest","OpenCart Spp Test Regression Suite","2025-09-09","passed","2025-09-09","com.qa.opencart.tests.LoginPageTest","Login Page Test ","com.qa.opencart.tests.LoginPageTest","forgotPwdLinkExistTest"
+"User is able to login with credentials","1233","loginTest","OpenCart Spp Test Regression Suite","2025-09-09","passed","2025-09-09","com.qa.opencart.tests.LoginPageTest","Login Page Test ","com.qa.opencart.tests.LoginPageTest","loginTest"
+"Verify the application logo test ","71","appLogoExistTest","OpenCart Spp Test Regression Suite","2025-09-09","passed","2025-09-09","com.qa.opencart.tests.LoginPageTest","Login Page Test ","com.qa.opencart.tests.LoginPageTest","appLogoExistTest"
