@@ -5,24 +5,25 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     
     <modelVersion>4.0.0</modelVersion>
-    <groupId>SeleniumFrameworkSeries</groupId>
-    <artifactId>SeleniumFrameworkSeries</artifactId>
+    <groupId>com.qa.opencart</groupId>
+    <artifactId>OpenCartAutomationFramework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <!-- Fix: Use consistent Java version -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.29.0</allure.version>
         <selenium.version>4.35.0</selenium.version>
-        <testng.version>7.10.2</testng.version>
+        <testng.version>7.11.0</testng.version>
         <aspectj.version>1.9.21</aspectj.version>
     </properties>
     
     <dependencyManagement>
         <dependencies>
-            <!-- Allure BOM - Fix: Use dependencyManagement with import scope -->
+            <!-- Allure BOM -->
             <dependency>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-bom</artifactId>
@@ -30,17 +31,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-    <groupId>org.aspectj</groupId>
-    <artifactId>aspectjweaver</artifactId>
-    <version>${aspectj.version}</version>
-    <scope>test</scope>
-</dependency>
         </dependencies>
     </dependencyManagement>
     
     <dependencies>
-        <!-- TestNG - Main dependency needed for your listeners -->
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -54,7 +49,7 @@
             <version>${selenium.version}</version>
         </dependency>
         
-        <!-- WebDriverManager for automatic driver management -->
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -67,6 +62,13 @@
             <artifactId>allure-testng</artifactId>
         </dependency>
         
+        <!-- AspectJ Weaver for Allure -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        
         <!-- ExtentReports -->
         <dependency>
             <groupId>com.aventstack</groupId>
@@ -74,7 +76,7 @@
             <version>5.0.9</version>
         </dependency>
         
-        <!-- Apache POI for Excel handling -->
+        <!-- Apache POI for Excel -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -87,32 +89,33 @@
             <version>5.2.4</version>
         </dependency>
         
-        
-        <!-- Jackson for JSON handling -->
+        <!-- Jackson for JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
         
-        <!-- Log4j for logging -->
+        <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.20.0</version>
         </dependency>
+        
         <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.32</version> <!-- latest stable as of 2025 -->
-    <scope>provided</scope>
-</dependency>
-<dependency>
-  <groupId>org.slf4j</groupId>
-  <artifactId>slf4j-simple</artifactId>
-  <version>2.0.13</version>
-  <scope>test</scope>
-</dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.13</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     
     <build>
@@ -132,13 +135,17 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
+                    <!-- Fix: Use forward slashes and parameter -->
                     <suiteXmlFiles>
-                       <suiteXmlFile>src\test\resources\testrunners\testng_regression.xml</suiteXmlFile>
-                       <!-- <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
-                     <!-- <argLine>
+                    <!-- Fix: Enable AspectJ weaver for Allure -->
+                    <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine> -->
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
             
@@ -147,6 +154,9 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.29.0</version>
+                <configuration>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
