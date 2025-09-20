@@ -83,7 +83,7 @@ pipeline
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     git 'https://github.com/HarishTakle34/Automation_Framework.git'
-                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_smoke.xml"
+                    bat "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml"
                     
                 }
             }
@@ -91,14 +91,14 @@ pipeline
         
         
         
-        stage('Publish Smoke Extent Report'){
+        stage('Publish Sanity Extent Report'){
             steps{
                      publishHTML([allowMissing: false,
                                   alwaysLinkToLastBuild: false, 
                                   keepAll: true, 
                                   reportDir: 'reports', 
                                   reportFiles: 'TestExecutionReport.html', 
-                                  reportName: 'HTML Smoke Extent Report', 
+                                  reportName: 'HTML Sanity Extent Report', 
                                   reportTitles: ''])
             }
         }
