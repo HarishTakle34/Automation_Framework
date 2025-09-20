@@ -91,7 +91,7 @@ pipeline
         
         
         
-        stage('Publish Sanity Extent Report'){
+        stage('Publish sanity Extent Report'){
             steps{
                      publishHTML([allowMissing: false,
                                   alwaysLinkToLastBuild: false, 
