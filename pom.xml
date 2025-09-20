@@ -137,7 +137,8 @@
                 <configuration>
                     <!-- Fix: Use forward slashes and parameter -->
                     <suiteXmlFiles>
-                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+						<suiteXmlFiles>src\test\resources\testrunners\testng_regression.xml</suiteXmlFiles>
+                      <!--  <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
                     </suiteXmlFiles>
                     <!-- Fix: Enable AspectJ weaver for Allure -->
                     <argLine>
