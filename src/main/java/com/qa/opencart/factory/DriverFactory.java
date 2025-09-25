@@ -40,8 +40,20 @@ public class DriverFactory {
 		
 		switch (browserName.toLowerCase().trim()) {
 		case "chrome":
-			//driver = new ChromeDriver(optionsManager.getChromeOptions());
-			tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
+			
+			if(Boolean.parseBoolean(prop.getProperty("remote")))
+			{
+				//run on grid:
+				initRemoteDriver(browserName);	
+				
+			}
+			else
+			{
+				//run on local:
+				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));	
+			}
+			
+			
 			break;
 			
 		case "firefox":
@@ -126,6 +138,40 @@ public class DriverFactory {
 
 	}
 
+	/*
+	 * run test on grid
+	 * @param browserName
+	 */
+	
+	private void initRemoteDriver(String browserName)
+	{
+		System.out.println("Running tests on GRID with Browser: "+ browserName);
+		try {
+		switch(browserName.toLowerCase().trim())
+		{
+		case "chrome":
+			tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")),optionsManager.getChromeOptions()));
+		    break;
+		    
+		case "firefox":
+			tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")),optionsManager.getFirefoxOptions()));
+		    break;
+		    
+		    
+		case "edge":
+			tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")),optionsManager.getEdgeOptions()));
+		    break;   
+		    default: 
+		    	System.out.println("wrong browser info cannot run on the grid remote machine.....");
+		    	break;
+		}
+		}
+		catch(MalformedURLException e)
+		{
+			
+		}
+	}
+	
 	/**
 	 * take screenshot
 	 */
