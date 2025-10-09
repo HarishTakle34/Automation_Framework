@@ -22,7 +22,7 @@ public class LoginPage {
 	 private By registerlink= By.linkText("Register");
 	 private By loginErrorMessage = By.cssSelector(".alert.alert-danger.alert-dismissible");
 	 
-	 private By defination = By.id("defination");
+	int i=10;//not in use 
 	 
 	 //page const....
 	 public LoginPage(WebDriver driver)

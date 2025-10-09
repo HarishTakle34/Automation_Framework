@@ -57,13 +57,37 @@ public class DriverFactory {
 			break;
 			
 		case "firefox":
+			
 			//driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
-			tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
+			
+			if(Boolean.parseBoolean(prop.getProperty("remote")))
+			{
+				//run on grid:
+				initRemoteDriver(browserName);	
+				
+			}
+			else
+			{
+				//run on local:
+				tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));	
+			}
+			
 			break;
 			
 		case "edge":
-			driver = new EdgeDriver(optionsManager.getEdgeOptions());
-			tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
+			//driver = new EdgeDriver(optionsManager.getEdgeOptions());
+			if(Boolean.parseBoolean(prop.getProperty("remote")))
+			{
+				//run on grid:
+				initRemoteDriver(browserName);	
+				
+			}
+			else
+			{
+				//run on local:
+				tlDriver.set(new EdgeDriver(optionsManager.getEdgeOptions()));	
+			}
+			
 			break;
 
 		default:
